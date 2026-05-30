@@ -653,7 +653,7 @@ img, svg {
 }
 
 .health-score-big {
-    font-family: var(--font-heading);
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, monospace;
     font-weight: 800;
     font-size: 2.5rem;
     color: var(--text-white);
@@ -689,7 +689,7 @@ img, svg {
 }
 
 .stat-val {
-    font-family: var(--font-heading);
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, monospace;
     font-weight: 600;
     font-size: 0.95rem;
     font-variant-numeric: tabular-nums;
@@ -1116,7 +1116,7 @@ img, svg {
 }
 
 .spark-value {
-    font-family: var(--font-heading);
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, monospace;
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--text-white);
@@ -1239,7 +1239,8 @@ img, svg {
 .slider-val-read {
     font-weight: 600;
     color: var(--text-white);
-    font-family: var(--font-heading);
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, monospace;
+    font-variant-numeric: tabular-nums;
 }
 
 .range-input {

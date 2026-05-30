@@ -928,7 +928,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 2. 模拟高频物理噪声（随机小脉冲抖动）
         // 如果滑块调得高，说明设备处于损坏偏心状态，物理噪声波动幅度也将随之成倍剧增
         const vibeNoiseScale = 0.06 + (targetVibe - 1.8) * 0.12;
-        const tempNoiseScale = 0.15 + (targetTemp - 45) * 0.15;
+        const tempNoiseScale = 0.04 + (targetTemp - 45) * 0.15;
 
         // 生成这一帧的含噪传感器数值
         const currentVibe = targetVibe + (Math.sin(frameCount * 0.4) * vibeNoiseScale) + (Math.random() - 0.5) * vibeNoiseScale;
