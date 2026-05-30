@@ -3,7 +3,7 @@
 A 6-page responsive marketing website for a fictional predictive-maintenance
 platform, built as a sample to demonstrate a clean blueprint-to-production workflow.
 
-**Live demo:** [https://your-project.vercel.app]
+**Live demo:** [https://forgewatch-site.vercel.app/]
 **Stack:** HTML · CSS · JavaScript · bundled with Vite · deployed on Vercel
 
 ---
