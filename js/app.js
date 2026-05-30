@@ -925,11 +925,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetVibe = sliderVibe ? parseFloat(sliderVibe.value) : 1.8;
         const targetTemp = sliderTemp ? parseFloat(sliderTemp.value) : 45.0;
 
-        // 2. 模拟高频物理噪声（随机小脉冲抖动）
-        // 如果滑块调得高，说明设备处于损坏偏心状态，物理噪声波动幅度也将随之成倍剧增
-        const vibeNoiseScale = 0.06 + (targetVibe - 1.8) * 0.12;
         // 生成这一帧的含噪传感器数值
-        const currentVibe = targetVibe + (Math.sin(frameCount * 0.4) * vibeNoiseScale) + (Math.random() - 0.5) * vibeNoiseScale;
+        const currentVibe = targetVibe; // 完全固定數值，拉動再變，不要任何隨機浮動
         const currentTemp = targetTemp; // 完全固定數值，拉動再變，不要任何隨機浮動
 
         // 更新左侧的“瞬时值读取”显示
