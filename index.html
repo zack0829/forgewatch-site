@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgewatch | 制造业设备预测性维护与早期故障预警平台</title>
+    <meta name="description" content="Forgewatch 致力于为制造企业提供新一代工业智能预测性维护平台。通过无缝接入现有资产传感器数据，利用自学习异常检测算法进行极早期故障预警，有效减少 40% 非计划停机，大幅提升平均无故障时间（MTBF）。">
+    <meta name="keywords" content="预测性维护, 工业物联网, 故障预警, 智能制造, 资产健康管理, 设备监测, 异常检测, Forgewatch">
+    
+    <!-- 引入高端 Google 字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- 引入主样式表 -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 (玻璃态模糊背景) -->
+    <header class="site-header" id="site-header">
+        <div class="container header-container">
+            <a href="#/" class="logo-link" id="logo-link">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="url(#logo-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" stroke="url(#logo-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="url(#logo-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs>
+                            <linearGradient id="logo-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#38bdf8" />
+                                <stop offset="1" stop-color="#10b981" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span class="logo-text">Forgewatch</span>
+            </a>
+
+            <!-- PC端导航 -->
+            <nav class="main-nav" id="main-nav">
+                <ul class="nav-list">
+                    <li><a href="#/" class="nav-link" id="nav-home" data-i18n="nav.home">主頁</a></li>
+                    <li><a href="#/platform" class="nav-link" id="nav-platform" data-i18n="nav.platform">平台功能</a></li>
+                    <li><a href="#/industries" class="nav-link" id="nav-industries" data-i18n="nav.industries">行业方案</a></li>
+                    <li><a href="#/pricing" class="nav-link" id="nav-pricing" data-i18n="nav.pricing">价格服务</a></li>
+                    <li><a href="#/about" class="nav-link" id="nav-about" data-i18n="nav.about">关于我们</a></li>
+                    <li><a href="#/contact" class="nav-link" id="nav-contact" data-i18n="nav.contact">联系我们</a></li>
+                </ul>
+            </nav>
+
+            <!-- 右侧 CTA 按钮 -->
+            <div class="header-cta">
+                <div class="lang-switcher" id="lang-switcher">
+                    <button class="lang-btn active" data-lang="cn">CN</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+                <a href="#/contact" class="btn btn-primary btn-glow" id="header-cta-btn" data-i18n="nav.cta">预约演示</a>
+            </div>
+
+            <!-- 移动端汉堡包菜单按钮 -->
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="打开菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- 移动端抽屉式导航栏 -->
+    <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+        <ul class="mobile-nav-list">
+            <li><a href="#/" class="mobile-nav-link" data-i18n="nav.home">主頁</a></li>
+            <li><a href="#/platform" class="mobile-nav-link" data-i18n="nav.platform">平台功能</a></li>
+            <li><a href="#/industries" class="mobile-nav-link" data-i18n="nav.industries">行业方案</a></li>
+            <li><a href="#/pricing" class="mobile-nav-link" data-i18n="nav.pricing">价格服务</a></li>
+            <li><a href="#/about" class="mobile-nav-link" data-i18n="nav.about">关于我们</a></li>
+            <li><a href="#/contact" class="mobile-nav-link" data-i18n="nav.contact">联系我们</a></li>
+            <li class="mobile-cta-li">
+                <div class="lang-switcher mobile-lang-switcher" id="mobile-lang-switcher">
+                    <button class="lang-btn active" data-lang="cn">CN</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+                <a href="#/contact" class="btn btn-primary btn-block" data-i18n="nav.cta">预约演示</a>
+            </li>
+        </ul>
+    </div>
+    
+    <!-- 移动端菜单背景遮罩 -->
+    <div class="mobile-drawer-overlay" id="mobile-drawer-overlay"></div>
+
+    <!-- 主体内容区域 (SPA 视图容器) -->
+    <main class="main-content" id="main-content">
+
+        <!-- 1. 首页视图 (Home) -->
+        <section id="home-view" class="page-view active">
+            <!-- Hero 视觉区域 -->
+            <div class="hero-section">
+                <div class="container hero-container">
+                    <div class="hero-text-content">
+                        <div class="badge-new">
+                            <span class="badge-pulse"></span>
+                            新一代预测性维护平台
+                        </div>
+                        <h1 class="hero-title">预知设备故障<br><span class="gradient-text">防患于未然</span></h1>
+                        <p class="hero-subtitle">Forgewatch 无缝接入您现有的工业设备，将原始传感器数据转化为清晰的极早期预警。大幅降低非计划停机时间，延长资产寿命，告别救火式被动修机。</p>
+                        <div class="hero-actions">
+                            <a href="#/contact" class="btn btn-primary btn-lg btn-glow">预约免费演示</a>
+                            <a href="#how-it-works" class="btn btn-secondary btn-lg" id="scroll-to-how">了解工作原理</a>
+                        </div>
+                    </div>
+                    <!-- 右侧动态视觉展示 (SVG + 动态光流) -->
+                    <div class="hero-visual">
+                        <div class="glow-bg"></div>
+                        <div class="visual-card">
+                            <div class="card-header">
+                                <div class="dot-indicators">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <span class="card-title-text">设备实时健康状态 (车间 #3 产线)</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="health-radar-container">
+                                    <div class="pulse-ring"></div>
+                                    <div class="pulse-ring ring-2"></div>
+                                    <div class="radar-circle">
+                                        <div class="health-score-big" id="hero-health-score">98</div>
+                                        <div class="health-label">健康评分 (正常)</div>
+                                    </div>
+                                </div>
+                                <div class="radar-stats">
+                                    <div class="radar-stat-item">
+                                        <span class="stat-lbl">实时振动</span>
+                                        <span class="stat-val text-green" id="hero-vibration-val">1.2 mm/s</span>
+                                    </div>
+                                    <div class="radar-stat-item">
+                                        <span class="stat-lbl">轴承温度</span>
+                                        <span class="stat-val text-green" id="hero-temp-val">42.5 ℃</span>
+                                    </div>
+                                    <div class="radar-stat-item">
+                                        <span class="stat-lbl">诊断状态</span>
+                                        <span class="stat-val text-cyan" id="hero-diag-val">运行平稳</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 合作伙伴信任徽章栏 (TrustBar) -->
+            <div class="trust-bar-section">
+                <div class="container">
+                    <p class="trust-label">备受全球顶尖运维与生产制造团队信赖</p>
+                    <div class="trust-logos">
+                        <!-- Company A - F，使用精美统一的微发光 SVG Logo 模拟工业集团 -->
+                        <div class="logo-item">
+                            <svg viewBox="0 0 120 40" class="trust-logo-svg"><text x="10" y="26" font-family="Outfit" font-weight="800" font-size="20" fill="currentColor" letter-spacing="1">ALPHA</text><circle cx="108" cy="20" r="4" fill="#38bdf8"/></svg>
+                        </div>
+                        <div class="logo-item">
+                            <svg viewBox="0 0 120 40" class="trust-logo-svg"><text x="10" y="26" font-family="Outfit" font-weight="800" font-size="20" fill="currentColor" letter-spacing="1">BETA.IND</text><rect x="106" y="14" width="8" height="8" fill="#10b981"/></svg>
+                        </div>
+                        <div class="logo-item">
+                            <svg viewBox="0 0 120 40" class="trust-logo-svg"><text x="15" y="26" font-family="Outfit" font-weight="800" font-size="20" fill="currentColor" letter-spacing="1">CORE.M</text><polygon points="106,12 114,16 114,24 106,28" fill="#38bdf8"/></svg>
+                        </div>
+                        <div class="logo-item">
+                            <svg viewBox="0 0 120 40" class="trust-logo-svg"><text x="12" y="26" font-family="Outfit" font-weight="800" font-size="20" fill="currentColor" letter-spacing="1">DYNA.CO</text><path d="M104,14 L114,20 L104,26 Z" fill="#10b981"/></svg>
+                        </div>
+                        <div class="logo-item">
+                            <svg viewBox="0 0 120 40" class="trust-logo-svg"><text x="8" y="26" font-family="Outfit" font-weight="800" font-size="19" fill="currentColor" letter-spacing="0.5">ECLIPSE</text><circle cx="107" cy="20" r="5" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                        </div>
+                        <div class="logo-item">
+                            <svg viewBox="0 0 120 40" class="trust-logo-svg"><text x="10" y="26" font-family="Outfit" font-weight="800" font-size="20" fill="currentColor" letter-spacing="1">FORGE.G</text><path d="M104,15 C104,15 109,12 114,15 C114,15 109,28 104,15 Z" fill="#38bdf8"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 核心数据栏 (Stats) -->
+            <div class="stats-section">
+                <div class="container stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" data-target="40" data-suffix="%">0%</div>
+                        <div class="stat-label">平均减少非计划停机时间</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" data-target="3" data-suffix="×">0×</div>
+                        <div class="stat-label">设备平均无故障时间（MTBF）提升</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" data-target="2" data-prefix="< " data-suffix="周">2周</div>
+                        <div class="stat-label">首次获得有效故障隐患洞察时间</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 核心优势汇总 (Feature Summary) -->
+            <div class="features-section">
+                <div class="container">
+                    <div class="section-header text-center">
+                        <h2 class="section-title">全方位守护您的车间资产</h2>
+                        <p class="section-subtitle">Forgewatch 融合先进的物联网传感器与机器学习算法，让设备维护工作化被动为主动。</p>
+                    </div>
+                    <div class="features-grid">
+                        <div class="feature-box">
+                            <div class="feature-icon bg-cyan">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2" />
+                                </svg>
+                            </div>
+                            <h3 class="feature-box-title">智能预测性维护</h3>
+                            <p class="feature-box-body">提前数周精准捕获设备磨损、不平衡及轴承过热。Forgewatch 自学习算法构建独特的“设备正常运行基准”，灵敏检测诱发重大停机故障的微小偏离趋势。</p>
+                        </div>
+                        <div class="feature-box">
+                            <div class="feature-icon bg-green">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                </svg>
+                            </div>
+                            <h3 class="feature-box-title">全渠道实时告警</h3>
+                            <p class="feature-box-body">当关键读数偏离安全阈值的第一时间，平台将通过短信、邮件及现有企业微信/钉钉/MES 系统精准推送警报。告别“停机时才发现”的滞后窘境。</p>
+                        </div>
+                        <div class="feature-box">
+                            <div class="feature-icon bg-orange">
+                                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <h3 class="feature-box-title">停机与运维成本骤降</h3>
+                            <p class="feature-box-body">让检修排单基于设备实际健康状况，而非刻板的时间表。避免紧急抢修带来的昂贵备件加急费、加班费，在产线计划性停工期内从容完成检修。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 工作原理 (How It Works) -->
+            <div id="how-it-works" class="how-it-works-section">
+                <div class="container">
+                    <div class="section-header text-center">
+                        <h2 class="section-title">极简部署，三步掌控开工率</h2>
+                        <p class="section-subtitle">Forgewatch 摒弃繁琐的传统工业改造，为您的工厂提供即插即用的智能闭环。</p>
+                    </div>
+                    <div class="steps-container">
+                        <div class="step-card">
+                            <div class="step-number">1</div>
+                            <h3 class="step-title">无缝连接 (Connect)</h3>
+                            <p class="step-body">直接吸附安装 Forgewatch 无线振动与温度传感器，或直接提取您现有的 PLC 及 SCADA 系统数据流。无需推倒重建，快速激活。</p>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-number">2</div>
+                            <h3 class="step-title">智能监测 (Monitor)</h3>
+                            <p class="step-body">为每台关键设备量身定制全天候健康评分。在统一的可视化看板中追踪历史基准、漂移趋势与早期异常读数。</p>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-number">3</div>
+                            <h3 class="step-title">精准排障 (Act)</h3>
+                            <p class="step-body">收到带故障严重等级、推荐备件与可能成因（如“轴承不对中”或“动平衡不良”）的优先级预警，指导团队迅速排障。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 底部 CTA 区域 (Bottom CTA) -->
+            <div class="bottom-cta-section">
+                <div class="container bottom-cta-container">
+                    <div class="glow-bg-cta"></div>
+                    <div class="cta-inner-content">
+                        <h2 class="cta-title">在您自己的真实设备上体验 Forgewatch</h2>
+                        <p class="cta-body">立即预约 20 分钟专业演示，我们的专家将结合与您厂区相似的设备运行数据集，为您实操还原整个控制大屏的超早期预警过程。</p>
+                        <a href="#/contact" class="btn btn-primary btn-lg btn-glow">预约免费演示</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 平台功能视图 (Platform) -->
+        <section id="platform-view" class="page-view">
+            <div class="container section-padding">
+                <div class="section-header text-center">
+                    <div class="badge-new">功能详情</div>
+                    <h1 class="page-title">一个平台，掌控全厂资产</h1>
+                    <p class="section-subtitle">从单台电机、水泵到集团化跨厂区运营，Forgewatch 为您的运维团队构筑统一、直观、智能的决策中枢。</p>
+                </div>
+
+                <!-- 交互式监测沙盒 (Sandbox Dashboard) - 杀手级体验区域 -->
+                <div class="sandbox-dashboard-container">
+                    <div class="sandbox-header">
+                        <div class="sandbox-info">
+                            <div class="live-indicator">
+                                <span class="pulse-dot"></span>
+                                LIVE
+                            </div>
+                            <h3>交互式预测性维护沙盒演示</h3>
+                        </div>
+                        <p class="sandbox-intro-text">拖动右侧的传感器参数滑块，模拟轴承磨损与异常恶化，实时观察图表和诊断中心如何防患于未然：</p>
+                    </div>
+
+                    <div class="sandbox-grid">
+                        <!-- 左侧：图表与实时参数展示 -->
+                        <div class="sandbox-visual-panel">
+                            <div class="canvas-header">
+                                <span class="chart-tag">实时传感器数据流 (100Hz)</span>
+                                <div class="chart-legends">
+                                    <span class="legend"><i class="legend-color cyan"></i> 振动幅度 (mm/s)</span>
+                                    <span class="legend"><i class="legend-color orange"></i> 轴承温度 (℃)</span>
+                                </div>
+                            </div>
+                            <div class="chart-canvas-wrapper">
+                                <canvas id="sandbox-chart" width="700" height="260"></canvas>
+                            </div>
+                            <div class="sparkline-grid">
+                                <div class="spark-box">
+                                    <div class="spark-label">实时振动均方根值</div>
+                                    <div class="spark-value"><span id="vibe-realtime">1.8</span> <span class="unit">mm/s</span></div>
+                                    <div class="spark-status text-green" id="vibe-realtime-status">正常</div>
+                                </div>
+                                <div class="spark-box">
+                                    <div class="spark-label">实时轴承温度</div>
+                                    <div class="spark-value"><span id="temp-realtime">45.0</span> <span class="unit">℃</span></div>
+                                    <div class="spark-status text-green" id="temp-realtime-status">正常</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 右侧：控制滑块与动态预警诊断报告 -->
+                        <div class="sandbox-control-panel">
+                            <div class="sandbox-widget health-gauge-widget">
+                                <h4>资产实时健康指数</h4>
+                                <div class="gauge-wrapper">
+                                    <svg class="radial-gauge" viewBox="0 0 100 100">
+                                        <circle class="gauge-bg" cx="50" cy="50" r="40" />
+                                        <circle class="gauge-progress" id="sandbox-gauge-path" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="12.5" />
+                                    </svg>
+                                    <div class="gauge-center">
+                                        <span class="gauge-number" id="sandbox-score-num">95</span>
+                                        <span class="gauge-label" id="sandbox-score-label">健康状态优</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 模拟滑块控制 -->
+                            <div class="sandbox-widget slider-widget">
+                                <h4>工业异常模拟控制器</h4>
+                                <div class="slider-group">
+                                    <div class="slider-labels">
+                                        <span class="slider-title">机械结构偏心 (振动漂移)</span>
+                                        <span class="slider-val-read" id="slide-vibe-lbl">1.8 mm/s</span>
+                                    </div>
+                                    <input type="range" id="slider-vibration" min="1.0" max="8.5" step="0.1" value="1.8" class="range-input">
+                                </div>
+                                <div class="slider-group">
+                                    <div class="slider-labels">
+                                        <span class="slider-title">摩擦生热 (轴承温度)</span>
+                                        <span class="slider-val-read" id="slide-temp-lbl">45 ℃</span>
+                                    </div>
+                                    <input type="range" id="slider-temperature" min="40" max="95" step="1" value="45" class="range-input">
+                                </div>
+                            </div>
+
+                            <!-- 诊断决策卡片 (智能故障根因分析) -->
+                            <div class="sandbox-widget diagnostic-widget" id="diagnostic-card">
+                                <div class="diag-header">
+                                    <span class="diag-icon green-shield" id="diag-icon">🛡️</span>
+                                    <h4 id="diag-title">设备基准运行正常</h4>
+                                </div>
+                                <div class="diag-body">
+                                    <p id="diag-desc">机器学习算法正在持续学习。当前各项传感器读数与自适应基准线完全吻合，未检测到任何疲劳或损坏风险。</p>
+                                    <div class="diag-meta" id="diag-action-box" style="display: none;">
+                                        <strong>系统建议：</strong> <span id="diag-action-text">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 平台四大特色特性 (原 sections) -->
+                <div class="platform-features-list">
+                    <!-- Section 1: Dashboard -->
+                    <div class="platform-section-row">
+                        <div class="section-row-text">
+                            <h3 class="row-title">1. 统一资产健康看板，告别无序猜测</h3>
+                            <p class="row-body">将生产车间内所有的电机、压缩机、泵阀和传送皮带数据汇总至单一的可视化屏幕。每个资产的健康评分、实时读数和劣化历史并排呈现，无需再繁琐比对多张电子表格，管理效率倍增。</p>
+                            <ul class="bullet-list">
+                                <li>支持多厂区/多产线级联拓扑结构</li>
+                                <li>参数自定义：振动、温度、超声波、电流</li>
+                                <li>卡片式直观界面，快速筛选高危资产</li>
+                            </ul>
+                        </div>
+                        <div class="section-row-visual">
+                            <div class="mock-ui-preview">
+                                <div class="ui-header">
+                                    <span class="ui-dot"></span><span class="ui-dot"></span><span class="ui-dot"></span>
+                                    <span class="ui-title">资产监控中心 Dashboard</span>
+                                </div>
+                                <div class="ui-content">
+                                    <div class="ui-grid-3">
+                                        <div class="ui-asset-card vibe-glow">
+                                            <span class="asset-name">#01 循环水泵电机</span>
+                                            <div class="asset-bar green"></div>
+                                            <div class="asset-info-line"><span>评分</span> <strong class="green-text">98</strong></div>
+                                        </div>
+                                        <div class="ui-asset-card vibe-glow">
+                                            <span class="asset-name">#02 冲压机空气压缩机</span>
+                                            <div class="asset-bar green"></div>
+                                            <div class="asset-info-line"><span>评分</span> <strong class="green-text">95</strong></div>
+                                        </div>
+                                        <div class="ui-asset-card alert-glow animated-alert">
+                                            <span class="asset-name">#03 主传动皮带齿轮箱</span>
+                                            <div class="asset-bar orange"></div>
+                                            <div class="asset-info-line"><span>评分</span> <strong class="orange-text">64</strong></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Anomaly Detection -->
+                    <div class="platform-section-row reverse">
+                        <div class="section-row-text">
+                            <h3 class="row-title">2. 自学习异常检测，杜绝“狼来了”的假警报</h3>
+                            <p class="row-body">传统设备阈值报警要么迟缓漏报，要么因过于敏感频繁误报导致运维团队陷入警报疲劳。Forgewatch 为每台资产运行前两周的数据流建立个性化运行“指纹”。动态基准随环境温度、季节和生产载荷变化自适应调整，只在真正的损坏发生偏离时发出警告。</p>
+                            <ul class="bullet-list">
+                                <li>无监督学习，无需手动标注故障数据</li>
+                                <li>自适应环境特征（如季节温度变化）</li>
+                                <li>极早期微秒级漂移侦测</li>
+                            </ul>
+                        </div>
+                        <div class="section-row-visual">
+                            <div class="mock-ui-preview">
+                                <div class="ui-header">
+                                    <span class="ui-dot"></span><span class="ui-dot"></span><span class="ui-dot"></span>
+                                    <span class="ui-title">自学习动态特征指纹</span>
+                                </div>
+                                <div class="ui-content-flex">
+                                    <svg viewBox="0 0 300 150" class="svg-chart">
+                                        <!-- 基准阴影带 -->
+                                        <path d="M 10,75 Q 40,30 80,60 T 150,90 T 220,50 T 290,80 L 290,110 L 10,110 Z" fill="rgba(16, 185, 129, 0.08)" stroke="rgba(16, 185, 129, 0.2)" stroke-width="1" />
+                                        <!-- 实际运行线 -->
+                                        <path d="M 10,75 Q 40,30 80,60 T 150,90 T 220,30 T 250,110 T 290,125" fill="none" stroke="#f97316" stroke-width="2.5" />
+                                        <!-- 偏离标记点 -->
+                                        <circle cx="230" cy="38" r="5" fill="#f97316" class="pulse-dot-svg"/>
+                                        <text x="240" y="35" fill="#f97316" font-size="10" font-family="Outfit">超基准异常偏移</text>
+                                        <text x="30" y="130" fill="#94a3b8" font-size="9">绿色带：自学习动态正常区间</text>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 3: Alerts -->
+                    <div class="platform-section-row">
+                        <div class="section-row-text">
+                            <h3 class="row-title">3. 多渠道协同预警，精准直达检修人员</h3>
+                            <p class="row-body">不仅仅是告警，更是行动指南。Forgewatch 支持自定义分级路由。低级别漂移会默默通知值班班长并记录于月报，而突发严重偏离则能通过企业微信、短信、邮件实时唤醒责任工程师，并附带可能原因（如轴承剥落）及推荐工器具，缩短 80% 的诊断耗时。</p>
+                            <ul class="bullet-list">
+                                <li>按资产严重度与值班排班智能路由</li>
+                                <li>故障可能原因与推荐维修步骤一并下发</li>
+                                <li>支持工单系统 (ERP/EAM) 的无缝工单流转</li>
+                            </ul>
+                        </div>
+                        <div class="section-row-visual">
+                            <div class="mock-ui-preview">
+                                <div class="ui-header">
+                                    <span class="ui-dot"></span><span class="ui-dot"></span><span class="ui-dot"></span>
+                                    <span class="ui-title">多渠道分级通知路由</span>
+                                </div>
+                                <div class="ui-content">
+                                    <div class="ui-alert-preview">
+                                        <div class="alert-p-header orange">
+                                            <span>⚠️ Forgewatch 异常报警</span>
+                                            <span>刚刚</span>
+                                        </div>
+                                        <div class="alert-p-body">
+                                            <strong>对象：</strong> 2号线空压机电机<br>
+                                            <strong>诊断：</strong> 不对称振动加剧（疑似轴承点蚀）<br>
+                                            <strong>工单状态：</strong> 已自动派发至 1 组李工
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 4: Reports -->
+                    <div class="platform-section-row reverse">
+                        <div class="section-row-text">
+                            <h3 class="row-title">4. 量化价值报告，精细掌控投资回报</h3>
+                            <p class="row-body">每月为您自动生成极富洞察力的运营与投资效益报告。统计本月成功避免的灾难性停机次数、折合减少的产值损失、备件及人工工时节省金额。为设备管理人员向集团管理层汇报及申请维护预算提供坚实的数据支撑。</p>
+                            <ul class="bullet-list">
+                                <li>一键导出 PDF/Excel 月度设备体检月报</li>
+                                <li>隐形损失节约估算模型</li>
+                                <li>高故障率设备与易损件排行榜，优化备件库存</li>
+                            </ul>
+                        </div>
+                        <div class="section-row-visual">
+                            <div class="mock-ui-preview">
+                                <div class="ui-header">
+                                    <span class="ui-dot"></span><span class="ui-dot"></span><span class="ui-dot"></span>
+                                    <span class="ui-title">本月运维效益量化简报</span>
+                                </div>
+                                <div class="ui-content flex-col">
+                                    <div class="ui-stat-bar-group">
+                                        <span>预估避免意外停机时间</span>
+                                        <div class="progress-bar-container"><div class="progress-bar" style="width: 82%;">82.4 小时</div></div>
+                                    </div>
+                                    <div class="ui-stat-bar-group">
+                                        <span>折合降低停机经济损失</span>
+                                        <div class="progress-bar-container"><div class="progress-bar cyan-bar" style="width: 75%;">¥ 38.6 万元</div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 行业方案视图 (Industries) -->
+        <section id="industries-view" class="page-view">
+            <div class="container section-padding">
+                <div class="section-header text-center">
+                    <div class="badge-new">垂直行业</div>
+                    <h1 class="page-title">为关键生产线和高精尖设备量身定制</h1>
+                    <p class="section-subtitle">Forgewatch 深入各垂直制造行业的核心痛点，为核心旋转机械、冲压线等设备提供坚实防护。</p>
+                </div>
+
+                <div class="industries-grid">
+                    <!-- Card 1: Automotive -->
+                    <div class="industry-card">
+                        <div class="industry-img-placeholder">
+                            <svg viewBox="0 0 100 100" class="ind-svg">
+                                <rect x="10" y="45" width="80" height="25" rx="5" fill="#151c2c" stroke="#38bdf8" stroke-width="2"/>
+                                <circle cx="30" cy="70" r="10" fill="#0b0f19" stroke="#38bdf8" stroke-width="2"/>
+                                <circle cx="70" cy="70" r="10" fill="#0b0f19" stroke="#38bdf8" stroke-width="2"/>
+                                <path d="M 25,45 L 35,25 L 65,25 L 75,45 Z" fill="#151c2c" stroke="#38bdf8" stroke-width="2"/>
+                                <!-- 机器人手臂暗示 -->
+                                <path d="M 50,25 L 50,5 L 65,10" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="industry-card-content">
+                            <h3>汽车制造与冲压装配</h3>
+                            <p>保障高速、超饱和大批量生产环境中的重型冲压机床、伺服主轴与工业六轴焊装机器人关节持续稳定运行，避免关键阀岛或偏心轮损伤引发整条冲装线瘫痪。</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Food & Beverage -->
+                    <div class="industry-card">
+                        <div class="industry-img-placeholder">
+                            <svg viewBox="0 0 100 100" class="ind-svg">
+                                <circle cx="50" cy="40" r="25" fill="#151c2c" stroke="#10b981" stroke-width="2"/>
+                                <!-- 传送带与罐子 -->
+                                <rect x="10" y="75" width="80" height="10" rx="3" fill="#151c2c" stroke="#10b981" stroke-width="2"/>
+                                <rect x="30" y="60" width="10" height="15" fill="#38bdf8"/>
+                                <rect x="50" y="60" width="10" height="15" fill="#38bdf8"/>
+                                <rect x="70" y="60" width="10" height="15" fill="#38bdf8"/>
+                            </svg>
+                        </div>
+                        <div class="industry-card-content">
+                            <h3>食品加工与灌装包装</h3>
+                            <p>在卫生安全要求高、生产节奏紧凑的饮料灌装、食品封包线中，全天候守护大功率冷冻鼓风机、绞碎减速箱和封盖转塔，杜绝恶性停机导致的巨量原材料腐败与交付违约。</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Energy & Utilities -->
+                    <div class="industry-card">
+                        <div class="industry-img-placeholder">
+                            <svg viewBox="0 0 100 100" class="ind-svg">
+                                <path d="M 20,80 L 40,20 L 60,20 L 80,80 Z" fill="#151c2c" stroke="#38bdf8" stroke-width="2"/>
+                                <!-- 风力叶片 -->
+                                <circle cx="50" cy="35" r="5" fill="#10b981"/>
+                                <path d="M 50,35 L 50,10 M 50,35 L 30,45 M 50,35 L 70,45" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="industry-card-content">
+                            <h3>能源开发与公用事业</h3>
+                            <p>实时监控偏远地区的风力发电机偏航减速箱、高压离心抽水泵与热电轮机组。提前预测关键机油杂质及定子绕组过热，降低极昂贵的无序现场故障拉练与巡检差旅成本。</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Heavy Industry -->
+                    <div class="industry-card">
+                        <div class="industry-img-placeholder">
+                            <svg viewBox="0 0 100 100" class="ind-svg">
+                                <!-- 大齿轮 -->
+                                <circle cx="50" cy="50" r="25" fill="#151c2c" stroke="#f97316" stroke-width="3" stroke-dasharray="10 5"/>
+                                <circle cx="50" cy="50" r="10" fill="#0b0f19" stroke="#f97316" stroke-width="2"/>
+                                <rect x="47" y="10" width="6" height="80" fill="#f97316" opacity="0.3"/>
+                            </svg>
+                        </div>
+                        <div class="industry-card-content">
+                            <h3>重工业与钢铁采矿</h3>
+                            <p>针对水泥磨机、炼钢辊道高负载以及矿山碎石机极其恶劣的粉尘振动工况，利用深度过滤算法消除底噪干扰，早期捕获大型低速重载轴承剥落、齿轮断齿等灾难性故障隐患。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 价格方案视图 (Pricing) -->
+        <section id="pricing-view" class="page-view">
+            <div class="container section-padding">
+                <div class="section-header text-center">
+                    <div class="badge-new">价格与订阅</div>
+                    <h1 class="page-title">伴随您的厂区规模，灵活扩展</h1>
+                    <p class="section-subtitle">从单条实验性产线起步试点，到全球多站点无缝部署。免除长期合同捆绑，以最适合的组合开启精益维护之旅。</p>
+                </div>
+
+                <div class="pricing-grid">
+                    <!-- Plan 1: Starter -->
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <span class="plan-subtitle">试点首选</span>
+                            <h3>基础体验版 (Starter)</h3>
+                            <p class="plan-for">适用于单条产线或概念验证 (PoC) 项目</p>
+                        </div>
+                        <div class="pricing-body">
+                            <ul class="plan-features">
+                                <li><span class="check-icon">✓</span> 支持接入高达 10 台关键资产</li>
+                                <li><span class="check-icon">✓</span> 核心资产运行健康度评估</li>
+                                <li><span class="check-icon">✓</span> 基础邮件与系统内警报通知</li>
+                                <li><span class="check-icon">✓</span> 5x8 小时标准远程客户支持</li>
+                            </ul>
+                            <a href="#/contact" class="btn btn-secondary btn-block">联系销售人员</a>
+                        </div>
+                    </div>
+
+                    <!-- Plan 2: Growth (Highlighted) -->
+                    <div class="pricing-card highlighted">
+                        <div class="plan-popular-badge">最受欢迎</div>
+                        <div class="pricing-header">
+                            <span class="plan-subtitle">全厂守护</span>
+                            <h3>车间专业版 (Growth)</h3>
+                            <p class="plan-for">适用于一至数个完整的生产车间</p>
+                        </div>
+                        <div class="pricing-body">
+                            <ul class="plan-features">
+                                <li><span class="check-icon">✓</span> 支持接入高达 100 台资产设备</li>
+                                <li><span class="check-icon">✓</span> <strong>自学习无监督异常漂移检测</strong></li>
+                                <li><span class="check-icon">✓</span> 分级预警、短信及企业微信智能路由</li>
+                                <li><span class="check-icon">✓</span> 自动化月度效益量化与体检报告</li>
+                                <li><span class="check-icon">✓</span> 7x24 小时优先通道高级技术支持</li>
+                            </ul>
+                            <a href="#/contact" class="btn btn-primary btn-block btn-glow">开启专业评估</a>
+                        </div>
+                    </div>
+
+                    <!-- Plan 3: Enterprise -->
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <span class="plan-subtitle">数字化集团</span>
+                            <h3>集团旗舰版 (Enterprise)</h3>
+                            <p class="plan-for">适用于多集团跨厂区、多国家多站点管理</p>
+                        </div>
+                        <div class="pricing-body">
+                            <ul class="plan-features">
+                                <li><span class="check-icon">✓</span> <strong>不限资产设备接入量</strong></li>
+                                <li><span class="check-icon">✓</span> 单点登录 (SSO) 与精细化角色权限</li>
+                                <li><span class="check-icon">✓</span> 开放 REST API 与 Webhooks 数据库对接</li>
+                                <li><span class="check-icon">✓</span> 专属高级大客户经理 (CSM) 持续护航</li>
+                                <li><span class="check-icon">✓</span> SLA 级响应时间与驻场硬件调试服务</li>
+                            </ul>
+                            <a href="#/contact" class="btn btn-secondary btn-block">咨询集团定制方案</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 关于我们视图 (About) -->
+        <section id="about-view" class="page-view">
+            <div class="container section-padding">
+                <div class="about-hero-section">
+                    <div class="about-hero-text">
+                        <div class="badge-new">关于我们</div>
+                        <h1 class="page-title">我们深知并受够了“抢修停机”的痛苦</h1>
+                        <p class="about-story-p">
+                            Forgewatch 诞生于真实粗犷的工厂车间。我们是一群曾在这片轰鸣声中工作的工程师。我们深知，当一个毫无征兆损坏的减速箱轴承突然咬死，导致整条关键流水线在深夜骤停时，那种手忙脚乱的抢修、焦急的备件催单，以及数以万计的产值损失有多痛心。
+                        </p>
+                        <p class="about-story-p">
+                            于是，我们决定做点什么，打造我们自己当时最梦寐以求的利器：一个部署极其简单、能用您已有数据流、并且以最直观易懂的语言向您进行超早期示警的智能平台。
+                        </p>
+                        <p class="about-story-p">
+                            今天，Forgewatch 已经帮助数以百计的制造团队成功将充满焦躁的“消防员式紧急抢修”平移为从容得体的“计划性预防检修”，让工业传感器数据真正成为保障设备平稳开工的护航战甲。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 核心价值观 (Values) -->
+                <div class="values-section">
+                    <div class="section-header text-center">
+                        <h2 class="section-title">指引我们的工业信条</h2>
+                    </div>
+                    <div class="values-grid">
+                        <div class="value-box">
+                            <div class="value-badge">01</div>
+                            <h3>务实落地，服务车间 (Practical)</h3>
+                            <p>我们坚信产品要为奔忙在设备前线的车间运维人员而建，而不是仅供会议室或PPT作秀。易懂、易用、解决实际痛点是我们的核心衡量尺标。</p>
+                        </div>
+                        <div class="value-box">
+                            <div class="value-badge">02</div>
+                            <h3>公开透明，杜绝黑盒 (Transparent)</h3>
+                            <p>明确的打分算法、清晰的预警偏离依据、明晰的可能成因。我们拒绝高深莫测的机器学习“黑盒”，任何早期告警都伴有数据事实的完美佐证。</p>
+                        </div>
+                        <div class="value-box">
+                            <div class="value-badge">03</div>
+                            <h3>稳健可靠，开工率之盾 (Reliable)</h3>
+                            <p>作为设备在线开工率最强有力的后盾，我们像对待最精密的设备一样，打磨平台在长周期高强度环境下的稳定性和异常预警的超高准度。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. 联系我们视图 (Contact) -->
+        <section id="contact-view" class="page-view">
+            <div class="container section-padding">
+                <div class="contact-grid-wrapper">
+                    <!-- 左侧：联系信息与详情 -->
+                    <div class="contact-info-panel">
+                        <div class="badge-new">联系我们</div>
+                        <h1 class="page-title">聊聊您的设备<br><span class="gradient-text">开工率提升计划</span></h1>
+                        <p class="contact-panel-sub">告诉我们您车间的设备运行现状与难点，我们的资深工业智能诊断工程师将在 1 个工作日内给您反馈，为您量身演示专属数据看板。</p>
+                        
+                        <div class="contact-details-list">
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                    </svg>
+                                </div>
+                                <div class="detail-text">
+                                    <span class="detail-label">公司名称</span>
+                                    <span class="detail-value">Forgewatch 有限公司 (Forgewatch Ltd)</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                </div>
+                                <div class="detail-text">
+                                    <span class="detail-label">企業總部</span>
+                                    <span class="detail-value">台灣</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                                <div class="detail-text">
+                                    <span class="detail-label">业务合作与诊断支持</span>
+                                    <span class="detail-value"><a href="mailto:hello@forgewatch.example" class="mail-link">hello@forgewatch.example</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 右侧：精美交互式表单 -->
+                    <div class="contact-form-panel">
+                        <form id="contact-form" class="premium-form">
+                            <div class="form-row flex-row">
+                                <div class="form-group floating-group">
+                                    <input type="text" id="fullName" name="fullName" required class="form-control" placeholder=" ">
+                                    <label for="fullName" class="floating-label">您的姓名 *</label>
+                                </div>
+                                <div class="form-group floating-group">
+                                    <input type="text" id="company" name="company" required class="form-control" placeholder=" ">
+                                    <label for="company" class="floating-label">企业/机构名称 *</label>
+                                </div>
+                            </div>
+                            <div class="form-group floating-group">
+                                <input type="email" id="email" name="email" required class="form-control" placeholder=" ">
+                                <label for="email" class="floating-label">工作邮箱地址 *</label>
+                            </div>
+                            <div class="form-group floating-group">
+                                <textarea id="message" name="message" rows="5" class="form-control" placeholder=" "></textarea>
+                                <label for="message" class="floating-label">您车间有哪些关键设备希望接入监测？(可选)</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg btn-glow btn-block" id="form-submit-btn">
+                                <span class="btn-text">发送预约申请</span>
+                                <span class="submit-loader" id="submit-loader"></span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 底部区域 (Footer) -->
+    <footer class="site-footer">
+        <div class="container footer-top">
+            <div class="footer-brand-col">
+                <a href="#/" class="logo-link footer-logo">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 17L12 22L22 17" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 12L12 17L22 12" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">Forgewatch</span>
+                </a>
+                <p class="footer-tagline">专为不可承受意外停机的硬核旋转与关键加工资产提供预测性智能维护。</p>
+            </div>
+            
+            <div class="footer-links-grid">
+                <div class="footer-col">
+                    <h4>核心功能</h4>
+                    <ul>
+                        <li><a href="#/platform">在线监控</a></li>
+                        <li><a href="#/pricing">订阅计划</a></li>
+                        <li><a href="#/industries">垂直行业</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>企业信息</h4>
+                    <ul>
+                        <li><a href="#/about">创始团队</a></li>
+                        <li><a href="#/contact">联系合作</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container footer-bottom">
+            <div class="footer-legal">
+                © 2026 Forgewatch 有限公司。保留所有权利。
+                <span class="legal-separator">|</span>
+                <span class="illustrative-disclaimer">声明：本网站所展示的全部统计图表、效益估算及模拟诊断数据均作为典型试点应用效果之示意说明。</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 表单提交成功弹窗 (Modal) -->
+    <div class="success-modal-overlay" id="success-modal">
+        <div class="success-modal-card">
+            <div class="modal-success-icon">✓</div>
+            <h3>预约申请已成功提交！</h3>
+            <p>感谢您关注 Forgewatch。我们已收到您的联络信息与设备需求：</p>
+            <div class="modal-info-summary" id="modal-info-summary">
+                <!-- 动态填充 -->
+            </div>
+            <p class="modal-footer-p">我们的资深现场物联网诊断顾问将在 <strong>1个工作日内</strong> 拨打您的联络邮箱/电话，为您建立专属的远程体验沙盒！</p>
+            <button class="btn btn-primary" id="modal-close-btn">返回浏览</button>
+        </div>
+    </div>
+
+    <!-- 载入主 JS 逻辑 -->
+    <script src="js/app.js"></script>
+</body>
+</html>
