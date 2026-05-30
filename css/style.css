@@ -658,6 +658,7 @@ img, svg {
     font-size: 2.5rem;
     color: var(--text-white);
     line-height: 1;
+    font-variant-numeric: tabular-nums;
 }
 
 .health-label {
@@ -691,6 +692,7 @@ img, svg {
     font-family: var(--font-heading);
     font-weight: 600;
     font-size: 0.95rem;
+    font-variant-numeric: tabular-nums;
 }
 
 @keyframes ring-pulse {
@@ -842,6 +844,7 @@ img, svg {
     background: linear-gradient(135deg, #ffffff 40%, var(--cyan));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    font-variant-numeric: tabular-nums;
 }
 
 .stat-label {
@@ -1118,6 +1121,7 @@ img, svg {
     font-weight: 700;
     color: var(--text-white);
     margin-bottom: 0.25rem;
+    font-variant-numeric: tabular-nums;
 }
 
 .spark-value .unit {
